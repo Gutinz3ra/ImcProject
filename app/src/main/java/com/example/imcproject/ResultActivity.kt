@@ -24,17 +24,33 @@ class ResultActivity : AppCompatActivity() {
 
 
         val bundle = intent.extras
-        if (bundle != null){
+            if (bundle != null){
 
-            val peso = bundle.getDouble("peso")
-            val altura = bundle.getDouble("altura")
-        }
+                val peso = bundle.getDouble("peso")
+                val altura = bundle.getDouble("altura")
 
+                textPeso.text = "Peso informado $peso"
+                textAltura.text = "Altura informada $altura"
 
-        btnVoltar = findViewById(R.id.btn_voltar)
-            btnVoltar.setOnClickListener {
-                finish()
+                val imc = peso / (altura * altura)
+
+               val resultado = if (imc < 18.5){
+                     "Baixo"
+
+                }else if (imc in 18.5 .. 24.9) {
+                     "Normal"
+
+                }else if (imc in 25.0 .. 29.9){
+                   "Acima do peso"
+
+                }else{
+                     "Obeso"
             }
-
+                textResultado.text = resultado
+        }
+        btnVoltar = findViewById(R.id.btn_voltar)
+        btnVoltar.setOnClickListener {
+            finish()
+        }
     }
 }
